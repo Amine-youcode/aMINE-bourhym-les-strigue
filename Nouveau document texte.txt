@@ -17,26 +17,20 @@ typedef struct {
 Reservation reservations[MAXRESERVATIONS];
 int reservation_count = 0;
 
+void installation_reservations(){
+    char Nom[100];
+    char Prénom[100];
+    char Téléphone[10];
+    int Age;
+    char Statut[100];
+    int Référence;
+    char Datederéservation[11];
+    
+     struct Personne personnes[10] = {{"Alice","bahr","0623435630",30,"validé",1,"10/07/29"}, {"mora","fivre","0623436543",12,"reporté",2,"12/07/29"}, {"abdellah","lbrkaoui","0623436543",13,"validé",3,"12/07/29"}, {"ayoub","ahtouch","0623436543",16,"traité",4,"12/07/29"}, {"brahym","ayman","0623436543",17,"annulé",5,"12/07/29"}, {"mohamed","brkawi","0623436543",20,"validé",6,"12/07/29"}, {"amine","amine","0623436543",88,"validé",7,"12/07/29"}, {"zyad","mobarik","0623436543",65,"reporté",8,"12/07/29"}, {"ayman","titich","0623436543",33,"annulé",9,"12/07/29"}, {"mohmed","bikbine","0623436543",22,"reporté",10,"12/07/29"}};
 
-void initialiser_reservations() {
-    const char *noms[10] = {"Amine", "Brahim", "Carime", "mohammed", "salah", "ayoub", "sliman", "Hannan", "maryam", "ilyas"};
-    const char *prénoms[10] = {"bourhym", "ilidrisi", "aatya", "idtalbe", "barazize", "idblaaid", "zyach", "hakimi", "bosofa", "messi"};
-    const char *téléphones[10] = {"0601010101", "0612345678", "0623456789", "0634567890", "0645678901", "0656789012", "0667890123", "0678901234", "0689012345", "0690123456"};
-    int ages[10] = {30, 25, 22, 40, 35, 18, 29, 31, 33, 27};
-    const char *statuts[10] = {"validé", "reporté", "validé", "annulé", "traité", "validé", "validé", "reporté", "annulé", "reporté"};
-    const char *dates[10] = {"01/01/2023", "02/01/2023", "03/01/2023", "04/01/2023", "05/01/2023", "06/01/2023", "07/01/2023", "08/01/2023", "09/01/2023", "10/01/2023"};
-
-    for (int i = 0; i < 10; i++) {
-        strcpy(reservations[i].Nom, noms[i]);
-        strcpy(reservations[i].Prénom, prénoms[i]);
-        strcpy(reservations[i].Téléphone, téléphones[i]);
-        reservations[i].Age = ages[i];
-        strcpy(reservations[i].Statut, statuts[i]);
-        reservations[i].Référence = i + 1;
-        strcpy(reservations[i].Datederéservation, dates[i]);
+    for (int i = 0; i <= 10; i++) {
+        printf("Personne %d: %s,%s,%s,%dans,%s,%d,%s\n", i + 1, personnes[i].nom, personnes[i].Prénom,personnes[i].Téléphone,personnes[i].Age,personnes[i].Statut,personnes[i].Référence,personnes[i].Datederéservation);
     }
-    reservation_count = 10;
-    return;
 }
 
 void Ajouter_une_réservation() {
@@ -46,23 +40,24 @@ void Ajouter_une_réservation() {
     }
 
     printf("Entrez le nom: ");
-    scanf("%s", reservations[reservation_count].Nom);
+    scanf("%s",&reservations[reservation_count].Nom);
     printf("Entrez le prénom: ");
-    scanf("%s", reservations[reservation_count].Prénom);
+    scanf("%s",&reservations[reservation_count].Prénom);
     printf("Entrez le téléphone: ");
-    scanf("%s", reservations[reservation_count].Téléphone);
+    scanf("%s",&reservations[reservation_count].Téléphone);
     printf("Entrez l'âge: ");
     scanf("%d", &reservations[reservation_count].Age);
     printf("Entrez le statut: ");
-    scanf("%s", reservations[reservation_count].Statut);
+    scanf("%s",&reservations[reservation_count].Statut);
     printf("Entrez la référence: ");
     scanf("%d", &reservations[reservation_count].Référence);
-    printf("Entrez la date de réservation (format JJ/MM/AAAA): ");
-    scanf("%s", reservations[reservation_count].Datederéservation);
+    printf("Entrez la date de réservation (format JJ/MM/AAAA):");
+    scanf("%s",&reservations[reservation_count].Datederéservation);
 
     reservation_count++;
     printf("La réservation a été ajoutée.\n");
 }
+
 
 void afficher_reservations() {
     if (reservation_count == 0) {
@@ -77,6 +72,7 @@ void afficher_reservations() {
                reservations[i].Statut, reservations[i].Datederéservation);
     }
 }
+
 void modifier_reservation() {
     int reference;
     printf("Entrez la référence de la réservation à modifier: ");
@@ -86,15 +82,15 @@ void modifier_reservation() {
         if (reservations[i].Référence == reference) {
             printf("Modifier les informations pour la réservation %d:\n", reference);
             printf("Entrez le nouveau nom: ");
-            scanf("%s", reservations[i].Nom);
+            scanf("%s",&reservations[i].Nom);
             printf("Entrez le nouveau prénom: ");
-            scanf("%s", reservations[i].Prénom);
+            scanf("%s",&reservations[i].Prénom);
             printf("Entrez le nouveau téléphone: ");
-            scanf("%s", reservations[i].Téléphone);
+            scanf("%s",&reservations[i].Téléphone);
             printf("Entrez le nouvel âge: ");
-            scanf("%d", &reservations[i].Age);
+            scanf("%d",&reservations[i].Age);
             printf("Entrez le nouveau statut: ");
-            scanf("%s", reservations[i].Statut);
+            scanf("%s",&reservations[i].Statut);
             printf("Réservation modifiée avec succès!\n");
             return;
         }
@@ -137,6 +133,7 @@ void rechercher_par_reference() {
     }
     printf("Réservation non trouvée.\n");
 }
+
 void afficher_statistiques() {
     if (reservation_count == 0) {
         printf("Aucune réservation pour calculer les statistiques.\n");
@@ -164,9 +161,8 @@ void afficher_statistiques() {
 int main() {
     int choix;
 
-    initialiser_reservations();
-
     do {
+        
         printf("\nMenu:\n");
         printf("1. Ajouter une réservation\n");
         printf("2. Modifier une réservation\n");
@@ -178,6 +174,7 @@ int main() {
         printf("Choisissez une option: ");
         scanf("%d", &choix);
 
+        
         switch (choix) {
             case 1:
                 Ajouter_une_réservation();
@@ -192,7 +189,7 @@ int main() {
                 afficher_reservations();
                 break;
             case 5:
-                rechercher_par_reference(); 
+                rechercher_par_reference();
                 break;
             case 6:
                 afficher_statistiques();
@@ -201,7 +198,7 @@ int main() {
                 printf("Merci d'avoir utilisé le programme. Au revoir!\n");
                 break;
             default:
-                printf("error \n");
+                printf("Option invalide, veuillez réessayer.\n");
         }
     } while (choix != 7);
 
